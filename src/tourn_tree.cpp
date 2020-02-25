@@ -26,6 +26,35 @@ void traverse_height(Node *root, int arr[], int &res)
     {
         res = arr[root->right->idx];
     }
+    int drugoitipok;
+    if (root->left->idx == root->idx)
+    {
+        if (root->left->left->idx != root->idx)
+        {
+            drugoitipok = arr[root->left->left->idx];
+        }
+        else
+        {
+            drugoitipok = arr[root->left->right->idx];
+        }
+    }
+    else
+    {
+        if (root->right->left->idx != root->idx)
+        {
+            drugoitipok = arr[root->right->left->idx];
+        }
+        else
+        {
+            drugoitipok = arr[root->right->right->idx];
+        }
+    }
+
+    if (drugoitipok < res)
+    {
+        res = drugoitipok;
+    }
+
     // он и есть второй по пиздатости тип
 }
 
@@ -38,7 +67,6 @@ void find_second_min(int arr[], int n)
     Node *root = NULL;
     for (int i = 0; i < n; i += 2)
     {
-        cout << "create_node(i);" << i << endl;
         Node *t1 = create_node(i); // берем одного типа
         Node *t2 = NULL;           // а это пока оставим на случай если массовка не четная
                                    // и типа сверху нескем сравнивать
